@@ -4,13 +4,15 @@ var values = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
 var deck = new Array();
 var players = new Array();
 var currentPlayer = 0;
+let balance = 100;
+let count = 0; //Card counter
 
 function createDeck()
 {
 	deck = new Array();
-	for (var i = 0 ; i < values.length; i++)
+	for (let i = 0 ; i < values.length; i++)
 	{
-		for(var x = 0; x < suits.length; x++)
+		for(let x = 0; x < suits.length; x++)
 		{
 			var weight = parseInt(values[i]);
 			if (values[i] == "J" || values[i] == "Q" || values[i] == "K")
@@ -26,7 +28,7 @@ function createDeck()
 function createPlayers(num)
 {
 	players = new Array();
-	for(var i = 1; i <= num; i++)
+	for(let i = 1; i <= num; i++)
 	{
 		var hand = new Array();
 		var player = { Name: 'Player ' + i, ID: i, Points: 0, Hand: hand };
@@ -60,16 +62,16 @@ function createPlayersUI()
 
 function shuffle()
 {
-	// for 1000 turns
-	// switch the values of two random cards
+	// For 1000 turns
+	// Switch the values of two random cards
 	for (var i = 0; i < 1000; i++)
 	{
 		var location1 = Math.floor((Math.random() * deck.length));
 		var location2 = Math.floor((Math.random() * deck.length));
-		var tmp = deck[location1];
+		var temp = deck[location1];
 
 		deck[location1] = deck[location2];
-		deck[location2] = tmp;
+		deck[location2] = temp;
 	}
 }
 
@@ -77,7 +79,7 @@ function startblackjack()
 {
 	document.getElementById('btnStart').value = 'Restart';
 	document.getElementById("status").style.display="none";
-	// deal 2 cards to every player object
+	// Deal 2 cards to every player object
 	currentPlayer = 0;
 	createDeck();
 	shuffle();
@@ -85,11 +87,12 @@ function startblackjack()
 	createPlayersUI();
 	dealHands();
 	document.getElementById('player_' + currentPlayer).classList.add('active');
+	updateDeck();
 }
 
 function dealHands()
 {
-	// alternate handing cards to each player
+	// Alternate handing cards to each player
 	// 2 cards each
 	for(var i = 0; i < 2; i++)
 	{
@@ -99,10 +102,11 @@ function dealHands()
 			players[x].Hand.push(card);
 			renderCard(card, x);
 			updatePoints();
+			updateCount();
 		}
 	}
-
 	updateDeck();
+	
 }
 
 function renderCard(card, player)
@@ -152,11 +156,12 @@ function updatePoints()
 
 function hitMe()
 {
-	// pop a card from the deck to the current player
-	// check if current player new points are over 21
+	//Gives a card from the deck to the current player
+	//Check if current player is over 21
 	var card = deck.pop();
 	players[currentPlayer].Hand.push(card);
 	renderCard(card, currentPlayer);
+	updateCount();
 	updatePoints();
 	updateDeck();
 	check();
@@ -164,7 +169,7 @@ function hitMe()
 
 function stay()
 {
-	// move on to next player, if any
+	// Move on to next player, if any
 	if (currentPlayer != players.length-1) {
 		document.getElementById('player_' + currentPlayer).classList.remove('active');
 		currentPlayer += 1;
@@ -199,7 +204,7 @@ function check()
 {
 	if (players[currentPlayer].Points > 21)
 	{
-		document.getElementById('status').innerHTML = 'Player: ' + players[currentPlayer].ID + ' LOST';
+		document.getElementById('status').innerHTML = 'Player: ' + players[currentPlayer].ID + ' went bust!';
 		document.getElementById('status').style.display = "inline-block";
 		end();
 	}
@@ -208,6 +213,18 @@ function check()
 function updateDeck()
 {
 	document.getElementById('deckcount').innerHTML = deck.length;
+}
+
+function updateCount(card, count)
+{
+	if (card == 2 || card == 3 || card == 4 || card == 5 || card ==6){
+		count -= count;
+	}
+	else if (card == 10 || card == 'J' || card == 'Q' || card == 'K'){
+		count+=count;
+	}
+	return count;
+	document.getElementById('currentCount').innerHTML = count;
 }
 
 window.addEventListener('load', function(){
