@@ -1,40 +1,65 @@
 <!DOCTYPE html>
 
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Blackjack Game</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="main.css">
-    </head>
-    <body>
-    
-        <div class="game" contenteditable="false">
-            <h3 contenteditable="false">Blackjack</h3>
-    
-    <div class="game-body" contenteditable="false">
-           <div class="game-options" contenteditable="false">
-            <input type="button" id="btnStart" class="btn" value="Start" onclick="startblackjack()">
-            <input type="button" class="btn" value="Hit Me" onclick="hitMe()">
-            <input type="button" class="btn" value="Stay" onclick="stay()">
-            </div>
-    
-                <div class="status" id="status" contenteditable="false"></div>
-    
-            <div id="deck" class="deck" contenteditable="false">
-                <div id="deckcount" contenteditable="false">52</div>
-            </div>
-    		
-    		 <div id="deck" class="deck" contenteditable="false">
-                Balance:<div contenteditable="false">100</div>
-            </div>
-            <div id="players" class="players" contenteditable="false">
-            </div>
-    
-            <div class="clear" contenteditable="false"></div>
-    </div>
-        </div>
-        <script src="main.js" async defer></script>
-    </body>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Blackjack Game</title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+
+	<div class="game" contenteditable="false">
+		<h3 contenteditable="false">Blackjack</h3>
+
+		<div class="game-body" contenteditable="false">
+			<div class="game-options" contenteditable="false">
+				<input type="button" id="btnStart" class="btn" value="Start" onclick="startblackjack()"> 
+				<input type="button" class="btn" value="Hit Me" onclick="hitMe()"> 
+				<input type="button" class="btn" value="Stay" onclick="stay()">
+			</div>
+
+			<div class="status" id="status" contenteditable="false"></div>
+
+			<div id="deck" class="deck" contenteditable="false">
+				Cards Left:
+				<div id="deckcount" contenteditable="false">52</div>
+			</div>
+
+			<div id="balance" class="balance" contenteditable="false">
+				Balance:
+				<div id="amountLeft" contenteditable="false">100</div>
+			</div>
+			<input id="betNum" type="number" placeholder="Bet Amount" size=10>
+
+			<div id="cardCount" class="cardCount" contenteditable="false">
+				Current Card Count:
+				<div id="currentCount" contenteditable="false">0</div>
+			</div>
+
+			<input id="numPlayers" name="playerNum" type="number" placeholder="Number of Players" size=20>
+			
+			<!-- <button onclick="createPlayers()">Submit</button> -->
+
+			<!-- <form>
+				<select id="numPlayers">
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+				</select> <br>
+				<br> <input type="button" onclick="disable()"
+					value="Disable list"> <input type="button"
+					onclick="enable()" value="Enable list">
+			</form> -->
+
+			<div id="players" class="players" contenteditable="false"></div>
+
+			<div class="clear" contenteditable="false"></div>
+		</div>
+	</div>
+	<script src="main.js" async defer></script>
+</body>
 </html>

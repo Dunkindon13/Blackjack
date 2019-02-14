@@ -5,6 +5,8 @@ var deck = new Array();
 var players = new Array();
 var currentPlayer = 0;
 let balance = 100;
+let count = 0; //Card counter
+let bet = document.getElementById('betNum').value;
 
 function createDeck()
 {
@@ -24,10 +26,11 @@ function createDeck()
 	}
 }
 
-function createPlayers(num)
+function createPlayers(numPlayers)
 {
+	numPlayers = document.getElementById('numPlayers').value;
 	players = new Array();
-	for(let i = 1; i <= num; i++)
+	for(let i = 1; i <= numPlayers; i++)
 	{
 		var hand = new Array();
 		var player = { Name: 'Player ' + i, ID: i, Points: 0, Hand: hand };
@@ -61,8 +64,8 @@ function createPlayersUI()
 
 function shuffle()
 {
-	// for 1000 turns
-	// switch the values of two random cards
+	// For 1000 turns
+	// Switch the values of two random cards
 	for (var i = 0; i < 1000; i++)
 	{
 		var location1 = Math.floor((Math.random() * deck.length));
@@ -78,19 +81,20 @@ function startblackjack()
 {
 	document.getElementById('btnStart').value = 'Restart';
 	document.getElementById("status").style.display="none";
-	// deal 2 cards to every player object
+	// Deal 2 cards to every player object
 	currentPlayer = 0;
 	createDeck();
 	shuffle();
-	createPlayers(3);
+	createPlayers(numPlayers);
 	createPlayersUI();
 	dealHands();
 	document.getElementById('player_' + currentPlayer).classList.add('active');
+	updateDeck();
 }
 
 function dealHands()
 {
-	// alternate handing cards to each player
+	// Alternate handing cards to each player
 	// 2 cards each
 	for(var i = 0; i < 2; i++)
 	{
@@ -100,10 +104,11 @@ function dealHands()
 			players[x].Hand.push(card);
 			renderCard(card, x);
 			updatePoints();
+			updateCount();
 		}
 	}
-
 	updateDeck();
+	
 }
 
 function renderCard(card, player)
@@ -153,11 +158,12 @@ function updatePoints()
 
 function hitMe()
 {
-	// pop a card from the deck to the current player
-	// check if current player new points are over 21
+	//Gives a card from the deck to the current player
+	//Check if current player is over 21
 	var card = deck.pop();
 	players[currentPlayer].Hand.push(card);
 	renderCard(card, currentPlayer);
+	updateCount();
 	updatePoints();
 	updateDeck();
 	check();
@@ -165,7 +171,7 @@ function hitMe()
 
 function stay()
 {
-	// move on to next player, if any
+	// Move on to next player, if any
 	if (currentPlayer != players.length-1) {
 		document.getElementById('player_' + currentPlayer).classList.remove('active');
 		currentPlayer += 1;
@@ -200,7 +206,7 @@ function check()
 {
 	if (players[currentPlayer].Points > 21)
 	{
-		document.getElementById('status').innerHTML = 'Player: ' + players[currentPlayer].ID + ' LOST';
+		document.getElementById('status').innerHTML = 'Player: ' + players[currentPlayer].ID + ' went bust!';
 		document.getElementById('status').style.display = "inline-block";
 		end();
 	}
@@ -211,13 +217,35 @@ function updateDeck()
 	document.getElementById('deckcount').innerHTML = deck.length;
 }
 
-function updateBalance()
+function updateBalance(balance, bet)
 {
-	document.getElementById('balance').innerHTML = balance;
+	for(var i = 0; i < players.length; i++)
+	{
+		if (players[i] == winner)
+		{
+			document.getElementById('amountLeft').innerHTML = balance+bet;
+		}
+		else{
+			document.getElementById('amountLeft').innerHTML = balance-bet;
+		}
+	}
+	
+}
+
+function updateCount(card, count)
+{
+	if (card == 2 || card == 3 || card == 4 || card == 5 || card ==6){
+		count -= count;
+	}
+	else if (card == 10 || card == 'J' || card == 'Q' || card == 'K'){
+		count+=count;
+	}
+	return count;
+	document.getElementById('currentCount').innerHTML = count;
 }
 
 window.addEventListener('load', function(){
 	createDeck();
 	shuffle();
-	createPlayers(1);
+	createPlayers(numPlayers);
 });

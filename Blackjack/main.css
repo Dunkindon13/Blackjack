@@ -96,6 +96,25 @@
 	border: double 5px;
 }
 
+.balance {
+	float: left;
+	background: white;
+	color: #222;
+	padding: 10px;
+	border-radius: 10px;
+	border: double 5px;
+}
+
+.cardCount {
+	float: right;
+	background: white;
+	color: #222;
+	padding: 10px;
+	border-radius: 10px;
+	border: double 5px;
+}
+
+
 .btn {
 	background: #222;
 	color: white !important;
