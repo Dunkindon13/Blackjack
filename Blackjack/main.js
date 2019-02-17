@@ -217,6 +217,17 @@ function updateDeck()
 	document.getElementById('deckcount').innerHTML = deck.length;
 }
 
+function getBalance(player)
+{
+	//var points = 0;
+	for(let i = 0; i < players.length; i++)
+	{
+		balance += players[player].Hand[i].Weight;
+	}
+	players[player].Points = points;
+	return points;
+}
+
 function updateBalance(balance, bet)
 {
 	for(var i = 0; i < players.length; i++)
@@ -227,6 +238,12 @@ function updateBalance(balance, bet)
 		}
 		else{
 			document.getElementById('amountLeft').innerHTML = balance-bet;
+		}
+		
+		for (var i = 0 ; i < players.length; i++)
+		{
+			getPoints(i);
+			document.getElementById('points_' + i).innerHTML = players[i].Points;
 		}
 	}
 	
