@@ -5,6 +5,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>Blackjack Game</title>
 <meta name="description" content="">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+	crossorigin="anonymous">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="main.css">
 </head>
@@ -16,9 +20,11 @@
 
 		<div class="game-body" contenteditable="false">
 			<div class="game-options" contenteditable="false">
-				<input type="button" id="btnStart" class="btn" value="Start" onclick="startblackjack()"> 
-				<input type="button" class="btn" value="Hit Me" onclick="hitMe()"> 
-				<input type="button" class="btn" value="Stay" onclick="stay()">
+				<input type="button" id="btnStart" class="btn" value="Start"
+					onclick="startblackjack()"> <input type="button"
+					id="hitBtn" class="btn" value="Hit Me" onclick="hitMe()"> <input
+					type="button" id="stayBtn" class="btn" value="Stay"
+					onclick="stay()">
 			</div>
 
 			<div class="status" id="status" contenteditable="false"></div>
@@ -39,27 +45,28 @@
 				<div id="currentCount" contenteditable="false">0</div>
 			</div>
 
-			<input id="numPlayers" name="playerNum" type="number" placeholder="Number of Players" size=20>
-			
-			<!-- <button onclick="createPlayers()">Submit</button> -->
-
-			<!-- <form>
-				<select id="numPlayers">
-					<option>1</option>
-					<option>2</option>
-					<option>3</option>
-					<option>4</option>
-				</select> <br>
-				<br> <input type="button" onclick="disable()"
-					value="Disable list"> <input type="button"
-					onclick="enable()" value="Enable list">
-			</form> -->
+			<input id="numPlayers" name="playerNum" type="number"
+				placeholder="Number of Players" min="1" size=20>
 
 			<div id="players" class="players" contenteditable="false"></div>
+			
+			<!-- <span id="message" style="color:#600; font-weight:bold">Welcome to Blackjack!<br>Click "Start" to Begin.</span> -->
 
 			<div class="clear" contenteditable="false"></div>
 		</div>
 	</div>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+		integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+		integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+		crossorigin="anonymous"></script>
 	<script src="main.js" async defer></script>
 </body>
 </html>
