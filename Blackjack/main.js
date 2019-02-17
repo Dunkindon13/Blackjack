@@ -3,6 +3,7 @@ var suits = ["Spades", "Hearts", "Diamonds", "Clubs"];
 var values = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
 var deck = new Array();
 var players = new Array();
+var dealerCards = ();
 var currentPlayer = 0;
 var balance = 100;
 var count = 0; //Card counter
@@ -39,6 +40,26 @@ function createPlayers(numPlayers)
 		players.push(player);
 	}
 	return numPlayers;
+}
+
+function createDealerUI()
+{
+	document.getElementById('dealer').innerHTML = '';
+	
+		var div_dealer = document.createElement('div');
+		var div_hand = document.createElement('div');
+		var div_points = document.createElement('div');
+
+		div_points.className = 'points';
+		div_points.id = 'points_' + i;
+		div_player.id = 'dealer_' + i;
+		div_player.className = 'dealer';
+		div_hand.id = 'hand_' + i;
+
+		div_dealer.appendChild(div_hand);
+		div_dealer.appendChild(div_points);
+		document.getElementById('dealer').appendChild(div_dealer);
+	}
 }
 
 function createPlayersUI()
