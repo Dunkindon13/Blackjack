@@ -20,9 +20,8 @@ function createDeck()
 			var weight = parseInt(values[i]);
 			if (values[i] == "J" || values[i] == "Q" || values[i] == "K")
 				weight = 10;
-			if (values[i] == "A"){
-				weight = 1;
-			}
+			if (values[i] == "A")
+				weight = 11;
 			var card = { Value: values[i], Suit: suits[x], Weight: weight };
 			deck.push(card);
 		}
