@@ -85,7 +85,10 @@ function startblackjack(numPlayers)
 	if (numPlayers < 1) {
 		message.innerHTML = "Number of players must have a value of at least 1.<br>Press Start to begin again.";
 	}
+	document.getElementById('hitBtn').disabled = false;
+	document.getElementById('stayBtn').disabled = false;
 	document.getElementById('btnStart').value = 'Restart';
+	document.getElementById('hitBtn').disabled = false;
 	document.getElementById("status").style.display="none";
 	// Deal 2 cards to every player object
 	currentPlayer = 0;
@@ -186,6 +189,7 @@ function stay()
 {
 	// Move on to next player, if any
 	document.getElementById('hitBtn').disabled = false;
+	document.getElementById('stayBtn').value = 'Stay';
 	if (currentPlayer != players.length-1) {
 		document.getElementById('player_' + currentPlayer).classList.remove('active');
 		currentPlayer += 1;
@@ -199,6 +203,8 @@ function stay()
 
 function endGame()
 {
+	document.getElementById('hitBtn').disabled = true;
+	document.getElementById('stayBtn').disabled = true;
 	var winner = -1;
 	var score = 0;
 
@@ -214,6 +220,7 @@ function endGame()
 
 	document.getElementById('status').innerHTML = 'Winner: Player ' + players[winner].ID;
 	document.getElementById("status").style.display = "inline-block";
+	document.getElementById('btnStart').value = 'New Game';
 }
 
 function check()
